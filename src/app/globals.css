@@ -1,3 +1,12 @@
+
+@font-face {
+  font-family: 'SevenSegment';
+  src: url('./fonts/7segment.woff') format('woff'); /* Update with your font path */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +23,8 @@
     --foreground: #ededed;
     /* --insideground: #C4DFE6; */
     --insideground: #FAF7F0;
+    --clockground: #3c313b;
+    
   }
 }
 

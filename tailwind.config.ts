@@ -12,9 +12,14 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         insidebg: "var(--insideground)",
+        clockground: "var(--clockground)",
+      },
+      fontFamily: {
+        sevenSegment: ['SevenSegment', 'sans-serif'],
       },
     },
   },
   plugins: [],
 };
+
 export default config;
