@@ -9,22 +9,21 @@ const rowdies = Rowdies({
   display: "swap",
 });
 
-const Break: React.FC = () => {
+const PomodoroTimer: React.FC = () => {
   const { setTotalTime } = useTimeContext();
+
   return (
     <div
       className="h-10 w-80 bg-foreground bg-opacity-20 rounded-md m-2 flex justify-center items-center"
-      onClick={() => {
-        setTotalTime(300);
-      }}
+      onClick={() => setTotalTime(1500)}
     >
       <button
-        className={`${rowdies.className} text-2xl text-clockground text-center p-1  `}
+        className={`${rowdies.className} text-2xl   text-center p-1 text-clockground `}
       >
-        Break
+        Pomodoro Timer
       </button>
     </div>
   );
 };
 
-export default Break;
+export default PomodoroTimer;
