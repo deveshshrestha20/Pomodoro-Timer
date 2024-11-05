@@ -12,6 +12,8 @@ const CountdownTimer: React.FC = ({  }) => {
     const [isActive, setIsActive] = useState<boolean>(false);
     const [isFinished, setIsFinished] = useState<boolean>(false);
 
+    const {isBreakActive, setIsBreakActive} = useTimeContext();
+
     const initTime = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds % 60;
@@ -49,9 +51,16 @@ const CountdownTimer: React.FC = ({  }) => {
     };
 
     const handleReset = () => {
+        if(isBreakActive=== true) {
+            setTotalTime(300);
+            setIsActive(false);
+            setIsFinished(false);
+        }
+        else {
         setTotalTime(1500);
         setIsActive(false);
         setIsFinished(false);
+        }
     };
 
     return (
