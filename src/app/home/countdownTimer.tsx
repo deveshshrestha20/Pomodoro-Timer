@@ -9,10 +9,10 @@ import { useTimeContext } from "../context/breakTimeProvider";
 
 const CountdownTimer: React.FC = ({  }) => {
     const {totalTime, setTotalTime} = useTimeContext();
-    const [isActive, setIsActive] = useState<boolean>(false);
-    const [isFinished, setIsFinished] = useState<boolean>(false);
+    
+    
 
-    const {isBreakActive, setIsBreakActive} = useTimeContext();
+    const {isBreakActive, setIsBreakActive, setIsStartRunning, isActive, setIsActive, isFinished, setIsFinished} = useTimeContext();
 
     const initTime = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
@@ -42,24 +42,28 @@ const CountdownTimer: React.FC = ({  }) => {
     }, [isActive, setTotalTime, totalTime]);
 
     const handleStart = () => {
-        setIsActive(true);
-        setIsFinished(false);
+        setIsActive(true); //State indicating the timer is started and active 
+        setIsFinished(false); //State indicating the timer hasn't ended
+        setIsStartRunning(true); // For  indicating that the start button is running 
+        
     };
 
     const handlePause = () => {
-        setIsActive(false);
+        setIsActive(false); //State indicating the timer is not active
+        setIsFinished(false); //State indicating the timer hasn't ended
+        setIsStartRunning(false); // For indicating that the start button is not running 
+        
     };
 
     const handleReset = () => {
-        if(isBreakActive=== true) {
-            setTotalTime(300);
-            setIsActive(false);
-            setIsFinished(false);
+        if(isBreakActive=== true) { //State for knowing if the break button is clicked
+            setTotalTime(300); //Break time
+            setIsActive(false); // the timer is not active
+            setIsStartRunning(false); // start button is not running 
         }
-        else {
-        setTotalTime(1500);
-        setIsActive(false);
-        setIsFinished(false);
+        else { // timer mai huda kheri reset button thichyo bhane conditions 
+        setTotalTime(1500); // Pomdoro timer 
+        setIsActive(false); // the timer is not active
         }
     };
 
