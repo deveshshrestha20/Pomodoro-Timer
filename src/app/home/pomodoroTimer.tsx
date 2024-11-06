@@ -13,7 +13,7 @@ const PomodoroTimer: React.FC = () => {
       className="h-10 w-[23rem] bg-foreground bg-opacity-20 rounded-lg m-2 flex justify-center items-center"
       onClick={() => {
         setTotalTime(1500)
-        setIsBreakActive(true);
+        setIsBreakActive(false); // Timer click garda breakActive false hunxha 
         setIsActive(false);
         
 

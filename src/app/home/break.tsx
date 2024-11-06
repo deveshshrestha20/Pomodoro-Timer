@@ -13,8 +13,9 @@ const Break: React.FC = () => {
       onClick={() => {
         setTotalTime(300); // Break time 
         setIsStartRunning(false); // For indicating that isStart button is not runnning 
-        setIsBreakActive(true); // Break button click gareko bhanera thaha painxha 
+        setIsBreakActive(true); // Break button click bhako bhanera indicate garne state
         setIsActive(false); // Main state for resetting and stopping the timer
+        
       }}
     >
       <button

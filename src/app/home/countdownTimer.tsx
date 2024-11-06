@@ -12,7 +12,7 @@ const CountdownTimer: React.FC = ({  }) => {
     
     
 
-    const {isBreakActive, setIsBreakActive, setIsStartRunning, isActive, setIsActive, isFinished, setIsFinished} = useTimeContext();
+    const {isBreakActive, setIsStartRunning, isActive, setIsActive, isFinished, setIsFinished} = useTimeContext();
 
     const initTime = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
@@ -39,18 +39,17 @@ const CountdownTimer: React.FC = ({  }) => {
                 clearInterval(timerInterval);
             }
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isActive, setTotalTime, totalTime]);
 
     const handleStart = () => {
         setIsActive(true); //State indicating the timer is started and active 
-        setIsFinished(false); //State indicating the timer hasn't ended
         setIsStartRunning(true); // For  indicating that the start button is running 
         
     };
 
     const handlePause = () => {
         setIsActive(false); //State indicating the timer is not active
-        setIsFinished(false); //State indicating the timer hasn't ended
         setIsStartRunning(false); // For indicating that the start button is not running 
         
     };
@@ -60,10 +59,14 @@ const CountdownTimer: React.FC = ({  }) => {
             setTotalTime(300); //Break time
             setIsActive(false); // the timer is not active
             setIsStartRunning(false); // start button is not running 
+            
         }
-        else { // timer mai huda kheri reset button thichyo bhane conditions 
+         else { // timer mai huda kheri reset button thichyo bhane conditions 
+         // Break thichda kheri matra isBreakActive true hunxha nabhaye aru bela false state ma basxha
         setTotalTime(1500); // Pomdoro timer 
         setIsActive(false); // the timer is not active
+        setIsStartRunning(false);
+        
         }
     };
 
