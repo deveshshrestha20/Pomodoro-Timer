@@ -5,6 +5,7 @@ import PomodoroTimer from './pomodoroTimer';
 import Settings from './settings';
 import Profile from './profile';
 import Tasks from './TaskComponent/tasks';
+import NewTasks from './TaskComponent/newTasks';
 
 
 
@@ -19,8 +20,12 @@ const Home = () => {
       <div className='absolute top-[5.6rem] left-[91rem]'>
         <Profile/>
       </div>
-      <div className='absolute top-40 left-[8rem] text-md'>
+      <div className='absolute top-40 left-[8rem] text-md '>
         <Tasks/>
+        <div className='pt-2'>
+        <NewTasks/>
+        </div>
+        
       </div>
       
     <div className="absolute top-36 left-[47rem] flex items-center justify-center h-[32rem] w-[42rem] rounded-3xl shadow-xl p-3">
