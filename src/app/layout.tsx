@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import TimeProvider from "./context/breakTimeProvider";
+import TaskProvider from "./context/taskProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,9 +31,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TimeProvider>
-         {children}
+          <TaskProvider>{children}</TaskProvider>
         </TimeProvider>
-        
       </body>
     </html>
   );

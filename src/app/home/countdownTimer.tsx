@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import React, { useState,useEffect } from "react";
+import React, { useEffect } from "react";
 import { IoPlayOutline } from "react-icons/io5";
 import { VscDebugRestart } from "react-icons/vsc";
 import { CiPause1 } from "react-icons/ci";
