@@ -116,7 +116,7 @@ const NewTasks: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-full mt-4">
+        <div className="w-full mt-1">
           <ul>
             {tasks.map((task) => (
               <li key={task.id}>
@@ -134,14 +134,14 @@ const NewTasks: React.FC = () => {
                         }
                       }}
                       inputRef={(input) => (editFieldRef.current[task.id] = input)}
-                      sx={{ width: "27em", marginBottom: "0.5em", marginTop: "0.2em" }}
+                      sx={{ width: "23.7em", marginBottom: "0.5em", marginTop: "0.2em" }}
                     />
                   ) : (
                     <TextField
                       value={task.task}
                       variant="outlined"
                       size="small"
-                      sx={{ width: "27em", marginBottom: "0.5em", marginTop: "0.2em" }}
+                      sx={{ width: "23.7em", marginBottom: "0.5em", marginTop: "0.2em" }}
                       InputProps={{ readOnly: true }}
                     />
                   )}
