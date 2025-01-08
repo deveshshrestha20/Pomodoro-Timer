@@ -3,12 +3,14 @@ import localFont from "next/font/local";
 import "./globals.css";
 import TimeProvider from "./context/breakTimeProvider";
 import TaskProvider from "./context/taskProvider";
+import { Toaster } from 'react-hot-toast'; 
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -31,7 +33,35 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <TimeProvider>
-          <TaskProvider>{children}</TaskProvider>
+          <TaskProvider>
+            {children}
+            <Toaster 
+              position="top-right"
+              toastOptions={{
+                
+                duration: 4000,
+                style: {
+                  background: '#363636',
+                  color: '#fff',
+                  padding: '16px',
+                  borderRadius: '10px',
+                  fontFamily: 'var(--font-geist-sans)', 
+                },
+                success: {
+                  
+                  style: {
+                    background: '#4CAF50',
+                  },
+                },
+                error: {
+                  
+                  style: {
+                    background: '#f44336',
+                  },
+                },
+              }}
+            />
+          </TaskProvider>
         </TimeProvider>
       </body>
     </html>

@@ -2,6 +2,9 @@
 import React from "react";
 import { rowdies } from "../fonts/fonts";
 import { useTimeContext } from "../context/breakTimeProvider";
+import {io } from "socket.io-client";
+
+const socket = io("http://localhost:3001");
 
 
 
@@ -12,10 +15,13 @@ const PomodoroTimer: React.FC = () => {
     <div
       className="h-10 w-[23rem] bg-foreground bg-opacity-20 rounded-lg m-2 flex justify-center items-center"
       onClick={() => {
+
+        
         setTotalTime(1500)
         setIsBreakActive(false); // Timer click garda breakActive false hunxha 
         setIsActive(false);
         
+        socket.emit("resetTimer",false)
 
 
       }

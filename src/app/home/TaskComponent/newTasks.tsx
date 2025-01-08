@@ -10,7 +10,7 @@ const NewTasks: React.FC = () => {
   const { value, setValue, tasks, setTasks } = useTaskContext();
   const [editableText, setEditableText] = React.useState("");
   const editFieldRef = React.useRef<{ [key: string]: HTMLInputElement | null }>({});
-
+  
   const addTask = (todo: string) => {
     setTasks([
       ...tasks,
@@ -82,7 +82,7 @@ const NewTasks: React.FC = () => {
             id="standard-basic"
             label="Add New Task"
             variant="standard"
-            margin="none"
+            
             color="info"
             value={value}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -107,7 +107,7 @@ const NewTasks: React.FC = () => {
               },
               "& .MuiInputBase-input": {
                 color: "#3c313b",
-                padding: "1px 0",
+                padding: "2px 0",
               },
             }}
           />

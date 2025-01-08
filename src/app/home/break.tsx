@@ -2,6 +2,10 @@
 import React from "react";
 import { rowdies } from "../fonts/fonts";
 import { useTimeContext } from "../context/breakTimeProvider";
+import { io } from "socket.io-client";
+
+// Initialize socket connection
+const socket = io("http://localhost:3001");
 
 
 
@@ -15,7 +19,7 @@ const Break: React.FC = () => {
         setIsStartRunning(false); // For indicating that isStart button is not runnning 
         setIsBreakActive(true); // Break button click bhako bhanera indicate garne state
         setIsActive(false); // Main state for resetting and stopping the timer
-        
+        socket.emit("breakState");
       }}
     >
       <button
