@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
     "@clerk/nextjs": "^6.9.9",
     "@emotion/react": "^11.13.3",
