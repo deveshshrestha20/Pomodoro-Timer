@@ -14,7 +14,10 @@ interface taskContextType {
     value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>,
   tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>,
+  isLoggedIn: boolean,
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
 export const TaskContext = createContext<taskContextType>(null!);
@@ -22,6 +25,7 @@ export const TaskContext = createContext<taskContextType>(null!);
 const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [value, setValue] = useState<string>("");
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
     <TaskContext.Provider
@@ -30,6 +34,8 @@ const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setTasks,
         value,
         setValue,
+        isLoggedIn,
+        setIsLoggedIn
       }}
     >
       {children}
