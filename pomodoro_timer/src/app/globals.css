@@ -1,0 +1,35 @@
+
+@font-face {
+  font-family: 'SevenSegment';
+  src: url('./fonts/7segment.woff') format('woff'); /* Update with your font path */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --background: #66A5AD;  */
+    --background: #D8D2C2;
+    --foreground: #ededed;
+    /* --insideground: #C4DFE6; */
+    --insideground: #FAF7F0;
+    --clockground: #3c313b;
+    
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
