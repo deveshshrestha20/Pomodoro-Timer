@@ -13,7 +13,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@alloc/quick-lru": "^5.2.0",
     "@clerk/nextjs": "^6.9.9",
     "@clerk/themes": "^2.2.5",
     "@emotion/react": "^11.13.3",
@@ -38,6 +37,7 @@
     "uuid": "^11.0.2"
   },
   "devDependencies": {
+    "@alloc/quick-lru": "^5.2.0",
     "@types/babel__core": "^7.20.5",
     "@types/howler": "^2.2.12",
     "@types/node": "^20",

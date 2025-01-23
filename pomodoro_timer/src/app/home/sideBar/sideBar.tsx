@@ -29,7 +29,7 @@ const GroupPomodoroSidebar = () => {
   const [currentSound, setCurrentSound] = useState("Rain");
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [userCount, setUserCount] = useState(0);
-  const [volume, setVolume] = useState(50); // Volume as percentage (0 - 100)
+  const [volume] = useState(50); // Volume as percentage (0 - 100)
   const [audioInitialized, setAudioInitialized] = useState(false);
 
   const { roomID } = useRoomContext();
