@@ -143,7 +143,7 @@ const CreateRoom: React.FC = () => {
       socket.emit("disconnectRoom", roomID);
       setRoomID("");
       setUserCount(0);
-      updateURL("");
+      updateURL(""); 
 
       socket.removeAllListeners();
 
