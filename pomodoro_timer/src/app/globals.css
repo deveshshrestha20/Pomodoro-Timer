@@ -1,7 +1,7 @@
 
 @font-face {
   font-family: 'SevenSegment';
-  src: url('/fonts/7segment.woff') format('woff'); /* Update with your font path */
+  src: url('./fonts/7segment.woff') format('woff'); /* Update with your font path */
   font-weight: normal;
   font-style: normal;
 }

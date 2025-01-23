@@ -19,7 +19,20 @@ const nextConfig: NextConfig = {
 
   // Image configuration
   images: {
-    domains: ["picsum.photos", "images.unsplash.com","img.clerk.com"], // Add allowed image domains
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
+    ],
     formats: ["image/avif", "image/webp"], // Enable optimized formats
   },
 };
