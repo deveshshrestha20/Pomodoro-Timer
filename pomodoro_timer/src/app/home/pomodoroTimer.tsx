@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback } from "react";
-import { rowdies } from "../fonts/fonts";
+import { rowdies } from "../../../public/fonts/fonts";
 import { useTimeContext } from "../context/breakTimeProvider";
 import { useRoomContext } from "../context/roomProvider";  
 import { getSocket } from "./socketUtil/socketInstance";
