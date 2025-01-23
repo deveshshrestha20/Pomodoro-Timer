@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   FiVolume2,
   FiVolumeX,
@@ -30,6 +30,7 @@ const GroupPomodoroSidebar = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [userCount, setUserCount] = useState(0);
   const [volume, setVolume] = useState(50); // Volume as percentage (0 - 100)
+  const [audioInitialized, setAudioInitialized] = useState(false);
 
   const { roomID } = useRoomContext();
   const socket = getSocket();
@@ -43,13 +44,45 @@ const GroupPomodoroSidebar = () => {
     Ocean: "/sounds/ocean.mp3",
   };
 
+  // Memoize playSound to prevent unnecessary re-renders
   const [playSound, { stop }] = useSound(soundFiles[currentSound], {
-    volume: volume / 100, // Default volume (can be adjusted using the slider)
-    interrupt: true, // Stop the previous sound when a new sound is played
-    key: currentSound, // Force re-initialization when sound changes
+    volume: volume / 100,
+    interrupt: true,
+    key: currentSound,
     loop: true,
+    onplay: () => setAudioInitialized(true),
   });
 
+  // Comprehensive audio initialization method
+  const initializeAudio = useCallback(() => {
+    if (!audioInitialized) {
+      // Ensure audio starts only through user interaction
+      playSound();
+    }
+  }, [audioInitialized, playSound]);
+
+  // Sound change handler with audio initialization
+  const handleSoundChange = useCallback((sound: string) => {
+    initializeAudio(); // Ensure audio is initialized
+    setCurrentSound(sound);
+    if (!isMuted) {
+      stop(); // Stop current sound
+      playSound(); // Play new sound
+    }
+  }, [initializeAudio, isMuted, playSound, stop]);
+
+  // Mute toggle with audio initialization
+  const toggleMute = useCallback(() => {
+    initializeAudio(); // Ensure audio is initialized
+    setIsMuted((prev) => {
+      if (prev) {
+        playSound(); // Unmute: start playing
+      } else {
+        stop(); // Mute: stop playing
+      }
+      return !prev;
+    });
+  }, [initializeAudio, playSound, stop]);
   useEffect(() => {
     // Stop any currently playing sound when switching sounds or when component unmounts
     stop();
@@ -88,18 +121,6 @@ const GroupPomodoroSidebar = () => {
     };
   }, [socket, roomID]);
 
-  const handleSoundChange = (sound: string) => {
-    setCurrentSound(sound);
-    if (!isMuted) playSound();
-  };
-
-  const toggleMute = () => {
-    setIsMuted((prev) => {
-      if (prev) playSound(); // Resume playback if unmuted
-      else stop(); // Stop playback if muted
-      return !prev;
-    });
-  };
 
   const ParticipantAvatar = ({ participant }: { participant: Participant }) => {
     if (participant.imageUrl) {
@@ -110,6 +131,7 @@ const GroupPomodoroSidebar = () => {
             alt={`${participant.name}'s avatar`}
             fill
             className="rounded-full object-cover"
+            sizes="60px"
           />
         </div>
       );
