@@ -7,6 +7,7 @@ const { customAlphabet } = require("nanoid");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+app.use(cors());
 const server = createServer(app);
 
 // Store Room and their states
@@ -292,4 +293,9 @@ io.on("connection", (socket) => {
 // Start Server
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+});
+
+// Add this route to handle the root path
+app.get("/", (req, res) => {
+  res.send("Server is running successfully!");
 });
