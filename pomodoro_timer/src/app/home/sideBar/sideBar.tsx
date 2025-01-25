@@ -28,10 +28,10 @@ interface Participant {
 const GroupPomodoroSidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentSound, setCurrentSound] = useState("Rain");
+  const [currentSound, setCurrentSound] = useState("Library");
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [userCount, setUserCount] = useState(0);
-  const [volume, setVolume] = useState(50); // Volume as percentage (0 - 100)
+  const [volume, setVolume] = useState(50); 
   const { isActive } = useTimeContext();
   const soundRef = useRef<Howl | null>(null);
 
