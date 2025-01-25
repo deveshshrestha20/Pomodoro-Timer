@@ -8,9 +8,11 @@ const PORT = process.env.PORT || 3001;
 
 
 const path = require("path");
-app.use(express.static(path.join(__dirname, "public")));
+
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 const server = createServer(app);
 
