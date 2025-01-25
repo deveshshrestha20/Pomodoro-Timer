@@ -4,6 +4,8 @@ const { Server } = require("socket.io");
 const cors = require("cors");
 const { customAlphabet } = require("nanoid");
 
+const PORT = process.env.PORT || 3001;
+
 const app = express();
 const server = createServer(app);
 
@@ -288,6 +290,6 @@ io.on("connection", (socket) => {
 });
 
 // Start Server
-server.listen(3001, () => {
-  console.log("Server running on http://localhost:3001");
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
