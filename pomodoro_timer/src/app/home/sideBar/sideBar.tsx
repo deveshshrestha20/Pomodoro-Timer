@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   FiVolume2,
   FiVolumeX,
@@ -13,7 +13,9 @@ import { MdVolumeMute } from "react-icons/md";
 import { useRoomContext } from "@/app/context/roomProvider";
 import { getSocket } from "../socketUtil/socketInstance";
 import Image from "next/image";
-import useSound from "use-sound";
+import { Howl } from "howler";
+
+import { useTimeContext } from "@/app/context/breakTimeProvider";
 
 // Define interfaces for type safety
 interface Participant {
@@ -29,65 +31,100 @@ const GroupPomodoroSidebar = () => {
   const [currentSound, setCurrentSound] = useState("Rain");
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [userCount, setUserCount] = useState(0);
-  const [volume] = useState(50); // Volume as percentage (0 - 100)
-  const [audioInitialized, setAudioInitialized] = useState(false);
+  const [volume, setVolume] = useState(50); // Volume as percentage (0 - 100)
+  const { isActive } = useTimeContext();
+  const soundRef = useRef<Howl | null>(null);
 
   const { roomID } = useRoomContext();
   const socket = getSocket();
 
-  const sounds = ["Rain", "Forest", "Coffee Shop", "White Noise", "Ocean"];
-  const soundFiles: Record<string, string> = {
-    Rain: "/sounds/rain.mp3",
-    Forest: "/sounds/forest.mp3",
-    "Coffee Shop": "/sounds/coffee-shop.mp3",
-    "White Noise": "/sounds/white-noise.mp3",
-    Ocean: "/sounds/ocean.mp3",
-  };
+  const sounds = ["Rain", "Brown Noise", "White Noise", "Ocean Waves", "Library"];
+  const soundFiles: Record<string, string> = useMemo(
+    () => ({
+      Rain: "/sounds/rain.mp3",
+      "Brown Noise": "/sounds/brown-noise.mp3",
+      "White Noise": "/sounds/white-noise.mp3",
+      "Ocean Waves": "/sounds/ocean.mp3",
+      Library: "/sounds/library.mp3",
+    }),
+    []
+  );
 
-  // Memoize playSound to prevent unnecessary re-renders
-  const [playSound, { stop }] = useSound(soundFiles[currentSound], {
-    volume: volume / 100,
-    interrupt: true,
-    key: currentSound,
-    loop: true,
-    onplay: () => setAudioInitialized(true),
-  });
+  const playSound = useCallback(() => {
+    // Stop existing sound if playing
+    if (soundRef.current) {
+      soundRef.current.stop();
+    }
 
-  // Comprehensive audio initialization method
-  const initializeAudio = useCallback(() => {
-    if (!audioInitialized) {
-      // Ensure audio starts only through user interaction
+    // Create new Howl instance, preserving the previous sound
+    soundRef.current = new Howl({
+      src: [soundFiles[currentSound]],
+      loop: true,
+      volume: isMuted ? 0 : volume / 100,
+    });
+
+    // Play the sound
+    soundRef.current.play();
+  }, [currentSound, isMuted, volume, soundFiles]);
+
+  const stopSound = useCallback(() => {
+    if (soundRef.current) {
+      soundRef.current.stop();
+    }
+  }, []);
+
+  // Start audio when timer starts
+  useEffect(() => {
+    if (isActive && !isMuted) {
       playSound();
     }
-  }, [audioInitialized, playSound]);
+  }, [isActive, isMuted, playSound]);
 
-  // Sound change handler with audio initialization
-  const handleSoundChange = useCallback((sound: string) => {
-    initializeAudio(); // Ensure audio is initialized
-    setCurrentSound(sound);
-    if (!isMuted) {
-      stop(); // Stop current sound
-      playSound(); // Play new sound
+  // Stop audio when timer is paused or reset
+  useEffect(() => {
+    if (!isActive) {
+      stopSound();
     }
-  }, [initializeAudio, isMuted, playSound, stop]);
+  }, [isActive, stopSound]);
 
-  // Mute toggle with audio initialization
+  const handleSoundChange = useCallback(
+    (newSound: string) => {
+      setCurrentSound(newSound);
+      if (!isMuted) {
+        playSound();
+      }
+    },
+    [isMuted, playSound]
+  );
+
   const toggleMute = useCallback(() => {
-    initializeAudio(); // Ensure audio is initialized
     setIsMuted((prev) => {
       if (prev) {
-        playSound(); // Unmute: start playing
+        // Unmute
+        if (soundRef.current) {
+          soundRef.current.volume(volume / 100);
+        } else if (isActive) {
+          playSound();
+        }
       } else {
-        stop(); // Mute: stop playing
+        // Mute
+        if (soundRef.current) {
+          soundRef.current.volume(0);
+        }
       }
       return !prev;
     });
-  }, [initializeAudio, playSound, stop]);
-  useEffect(() => {
-    // Stop any currently playing sound when switching sounds or when component unmounts
-    stop();
-    if (!isMuted) playSound(); // Play the new sound if not muted
-  }, [currentSound, isMuted, playSound, stop]);
+  }, [volume, isActive, playSound]);
+
+  const handleVolumeChange = useCallback(
+    (newVolume: number) => {
+      setVolume(newVolume);
+      if (soundRef.current) {
+        soundRef.current.volume(isMuted ? 0 : newVolume / 100);
+      }
+    },
+    [isMuted]
+  );
 
   useEffect(() => {
     if (!socket || !roomID) {
@@ -98,7 +135,10 @@ const GroupPomodoroSidebar = () => {
     }
 
     const handleUserCount = (count: number) => setUserCount(count);
-    const handleRoomUsers = (users: Participant[]) => setParticipants(users);
+    const handleRoomUsers = (users: Participant[]) => {
+      setParticipants(users);
+      setUserCount(users.length);
+    };
     const handleDisconnect = () => {
       setParticipants([]);
       setUserCount(0);
@@ -121,6 +161,15 @@ const GroupPomodoroSidebar = () => {
     };
   }, [socket, roomID]);
 
+  // Cleanup sound on unmount
+  useEffect(() => {
+    return () => {
+      if (soundRef.current) {
+        soundRef.current.stop();
+        soundRef.current.unload();
+      }
+    };
+  }, []);
 
   const ParticipantAvatar = ({ participant }: { participant: Participant }) => {
     if (participant.imageUrl) {
@@ -201,10 +250,14 @@ const GroupPomodoroSidebar = () => {
                         {participant.name}
                       </div>
                       <div className="text-xs text-[#e4d5e3]/70">
-                        {participant.online ? 'Online' : 'Offline'}
+                        {participant.online ? "Online" : "Offline"}
                       </div>
                     </div>
-                    <div className={`h-2 w-2 rounded-full ${participant.online ? 'bg-green-400' : 'bg-[#2c212b]'}`} />
+                    <div
+                      className={`h-2 w-2 rounded-full ${
+                        participant.online ? "bg-green-400" : "bg-[#2c212b]"
+                      }`}
+                    />
                   </div>
                 ))}
               </div>
@@ -230,10 +283,11 @@ const GroupPomodoroSidebar = () => {
                   leftIcon={<MdVolumeMute />}
                   rightIcon={<IoVolumeMediumSharp />}
                   startingValue={0}
-                  
+                  defaultValue={volume}
                   maxValue={100}
                   isStepped
                   stepSize={10}
+                  onValueChange={handleVolumeChange}
                 />
               </div>
             </div>
