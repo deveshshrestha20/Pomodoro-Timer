@@ -6,6 +6,10 @@ const { customAlphabet } = require("nanoid");
 
 const PORT = process.env.PORT || 3001;
 
+
+const path = require("path");
+app.use(express.static(path.join(__dirname, "public")));
+
 const app = express();
 app.use(cors());
 const server = createServer(app);
@@ -19,7 +23,7 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://group-pomodoro-timer.vercel.app/home",
+    origin: "https://group-pomodoro-timer.vercel.app",
     methods: ["GET", "POST"],
   },
 });
