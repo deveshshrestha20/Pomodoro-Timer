@@ -6,6 +6,7 @@ const { customAlphabet } = require("nanoid");
 
 const PORT = process.env.PORT || 3001;
 
+require("dotenv").config();
 
 const path = require("path");
 
@@ -25,7 +26,7 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://group-pomodoro-timer.vercel.app",
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST"],
   },
 });
