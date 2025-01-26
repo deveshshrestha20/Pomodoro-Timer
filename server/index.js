@@ -26,7 +26,10 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: [
+      "http://localhost:3000", // Local development
+      "https://group-pomodoro-timer.vercel.app", // Deployed frontend
+    ],
     methods: ["GET", "POST"],
   },
 });
