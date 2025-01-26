@@ -1,7 +1,7 @@
 const express = require("express")
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const cors = require("cors");
+const cors = require("cors")
 const { customAlphabet } = require("nanoid");
 const PORT = process.env.PORT || 3001;
 
@@ -11,9 +11,9 @@ const path = require("path");
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
-
-
 app.use(cors());
+
+
 const server = createServer(app);
 
 // Store Room and their states
@@ -25,11 +25,9 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 
 const io = new Server(server, {
   cors: {
-    origin: [ 
-      process.env.CLIENT_URL, // Local development
-      "http://group-pomodoro-timer.vercel.app", // Deployed frontend
-  ],
+    origin: "http://localhost:3000", 
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
