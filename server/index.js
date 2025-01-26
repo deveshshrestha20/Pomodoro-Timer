@@ -8,8 +8,9 @@ const PORT = process.env.PORT || 3001;
 require("dotenv").config();
 
 const path = require("path");
-app.use(express.static(path.join(__dirname, "public")));
 const app = express();
+app.use(express.static(path.join(__dirname, "public")));
+
 
 
 app.use(cors());
@@ -25,8 +26,8 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 const io = new Server(server, {
   cors: {
     origin: [ 
-    "http://localhost:3000", // Local development
-      "https://group-pomodoro-timer.vercel.app", // Deployed frontend
+      process.env.CLIENT_URL, // Local development
+      "http://group-pomodoro-timer.vercel.app", // Deployed frontend
   ],
     methods: ["GET", "POST"],
   },
