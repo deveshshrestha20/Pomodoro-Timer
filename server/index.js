@@ -25,7 +25,7 @@ const nanoid = customAlphabet("4567890abcdef", 6);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", 
+    origin:"*", 
     methods: ["GET", "POST"],
     credentials: true,
   },
