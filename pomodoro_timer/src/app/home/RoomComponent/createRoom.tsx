@@ -157,11 +157,7 @@ const CreateRoom: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center space-y-4">
-      {!isConnected && (
-        <div className="text-red-500 animate-pulse">
-          Connecting to server...
-        </div>
-      )}
+      
       
       {!roomID ? (
         <div className="flex flex-col items-center space-y-2 p-6">
