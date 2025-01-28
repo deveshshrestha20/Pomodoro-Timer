@@ -71,10 +71,11 @@ const NewTasks: React.FC = () => {
         component="section"
         className="p-4 border-4 border-dashed border-[#3c313b] bg-[#D8D2C2] rounded-xl w-full flex flex-col items-start gap-2"
         style={{
-          width: "420px",
+          width: "390px",
           maxHeight: "380px",
           height: tasks.length > 0 ? `${160 + tasks.length * 37}px` : "90px",
           overflowY: tasks.length * 50 > 300 ? "auto" : "hidden",
+          overflowX: "hidden",
         }}
       >
         <div className="flex items-center mb-2">
@@ -96,7 +97,7 @@ const NewTasks: React.FC = () => {
               },
             }}
             sx={{
-              width: "38ch",
+              width: "34ch",
               "& .MuiInput-underline:before": {
                 borderBottomColor: "black",
                 borderBottomWidth: "2px",
@@ -111,8 +112,8 @@ const NewTasks: React.FC = () => {
               },
             }}
           />
-          <div onClick={handleSubmit} className="relative left-9 top-2 cursor-pointer">
-            <MdOutlineAdd className="text-black w-11 h-10" />
+          <div onClick={handleSubmit} className="relative left-1 top-2 cursor-pointer">
+          <MdOutlineAdd className="text-black" style={{ width: "24px", height: "28px" }} />
           </div>
         </div>
 
@@ -134,14 +135,14 @@ const NewTasks: React.FC = () => {
                         }
                       }}
                       inputRef={(input) => (editFieldRef.current[task.id] = input)}
-                      sx={{ width: "23.7em", marginBottom: "0.5em", marginTop: "0.2em" }}
+                      sx={{ width: "19em", marginBottom: "0.5em", marginTop: "0.2em" }}
                     />
                   ) : (
                     <TextField
                       value={task.task}
                       variant="outlined"
                       size="small"
-                      sx={{ width: "23.7em", marginBottom: "0.5em", marginTop: "0.2em" }}
+                      sx={{ width: "21em", marginBottom: "0.5em", marginTop: "0.2em" }}
                       InputProps={{ readOnly: true }}
                     />
                   )}
