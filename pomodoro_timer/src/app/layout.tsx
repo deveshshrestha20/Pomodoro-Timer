@@ -1,4 +1,4 @@
-
+import "./globals.css";
 import { Metadata } from 'next';
 import RootLayoutClient from './layout-client';
 

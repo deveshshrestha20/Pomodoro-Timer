@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       {/* Profile */}
       <div className="absolute top-4 right-4 sm:right-28 md:right-32 lg:right-36 xl:right-40 2xl:right-44">
         <Profile />
-      </div>
+      </div> 
 
       <div className="absolute top-70 left-1/2 transform -translate-x-1/2 w-full max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%]">
         <CreateRoom />
