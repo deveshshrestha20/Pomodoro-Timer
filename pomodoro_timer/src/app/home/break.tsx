@@ -13,7 +13,7 @@ const Break: React.FC = () => {
 
   const handleBreakClick = useCallback(() => {
     playSound();
-    setTotalTime(300);
+    setTotalTime(600);
     setIsStartRunning(false);
     setIsBreakActive(true);
     setIsActive(false);

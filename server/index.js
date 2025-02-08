@@ -33,10 +33,10 @@ const io = new Server(server, {
 
 // Helper: Create Timer State
 const createTimerState = (isBreakActive = false) => ({
-  totalTime: isBreakActive ? 300 : 1500, // Default: 25 mins (1500s) or 5 mins (300s)
+  totalTime: isBreakActive ? 600 : 3000, // Default: 50 mins (3000s) or 5 mins (300s)
   isActive: false,
   isBreakActive,
-  breakTime: 300, // Default break time: 5 mins
+  breakTime: 600, // Default break time: 5 mins
 });
 
 // Helper: Get room participants
@@ -111,7 +111,7 @@ io.on("connection", (socket) => {
     // Update room's timer state for break
     room.timerState = {
       ...room.timerState,
-      totalTime: 300, // 5 minutes break
+      totalTime: 600, // 5 minutes break
       isActive: false,
       isBreakActive: true
     };
@@ -198,7 +198,7 @@ io.on("connection", (socket) => {
           // Toggle break time
           timerState.isActive = false;
           timerState.isBreakActive = !timerState.isBreakActive;
-          timerState.totalTime = timerState.isBreakActive ? 300 : 1500; // 5 minutes break or 25 minutes work
+          timerState.totalTime = timerState.isBreakActive ? 600 : 3000; // 5 minutes break or 25 minutes work
   
           // // Emit final timer state and completion event
           // console.log("Timer completed, emitting final timerState and timerComplete");

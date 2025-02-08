@@ -20,7 +20,7 @@ export const TimeContext = createContext<TimeContextType>(null!);
 
 
 const TimeProvider: React.FC<{children: ReactNode}> = ({ children }) => {
-    const [totalTime, setTotalTime] = useState<number>(1500);
+    const [totalTime, setTotalTime] = useState<number>(3000);
     const [isBreakActive, setIsBreakActive] = useState<boolean>(false);
     const [isStartRunning, setIsStartRunning] = useState<boolean>(false);
     const [isActive, setIsActive] = useState<boolean>(false);

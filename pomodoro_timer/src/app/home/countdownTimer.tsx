@@ -48,7 +48,7 @@ const CountdownTimer: React.FC = () => {
             { duration: 4000 }
           );
           setIsFinished(true)
-          return isBreakActive ? 1500 : 300; // Switch between work and break time
+          return isBreakActive ? 3000 : 600; // Switch between work and break time
         }
         return prevTime - 1;
       });
@@ -124,7 +124,7 @@ const CountdownTimer: React.FC = () => {
 
   const handleReset = useCallback(() => {
     playSound();
-    const resetTime = isBreakActive ? 300 : 1500;
+    const resetTime = isBreakActive ? 600 : 3000;
     setTotalTime(resetTime);
     setIsActive(false);
 

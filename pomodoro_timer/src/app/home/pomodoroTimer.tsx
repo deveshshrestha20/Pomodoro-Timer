@@ -13,7 +13,7 @@ const PomodoroTimer: React.FC = () => {
 
   const handleTimerClick = useCallback(() => {
     playSound();
-    setTotalTime(1500);
+    setTotalTime(3000);
     setIsBreakActive(false);
     setIsActive(false);
 
