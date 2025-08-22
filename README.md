@@ -23,6 +23,10 @@ A **real-time collaborative Pomodoro timer** where users can **create and join r
 
 ![image](https://github.com/user-attachments/assets/f1d3e427-33a9-4565-a243-e8e145573e8d)
 
+<img width="1920" height="917" alt="image" src="https://github.com/user-attachments/assets/ad46ceef-8c61-43e9-bf06-d0e318e2b3a1" />
+
+
+
 
 
 ## ⚙️ Installation & Setup  
