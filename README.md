@@ -1,5 +1,4 @@
-# <img width="600" height="480" alt="image" src="https://github.com/user-attachments/assets/15224787-cd40-4346-8e66-29c7f2612e66" />
- Group Pomodoro Timer with Socket.IO  
+# Group Pomodoro Timer with Socket.IO  
 
 A **real-time collaborative Pomodoro timer** where users can **create and join rooms**, **synchronize study sessions**, and **see active participants**. Built with **Next.js, TypeScript, Node.js, and Socket.IO** to enhance productivity in group study sessions.  
 
