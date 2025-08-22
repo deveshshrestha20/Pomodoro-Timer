@@ -2,8 +2,8 @@
 
 A **real-time collaborative Pomodoro timer** where users can **create and join rooms**, **synchronize study sessions**, and **see active participants**. Built with **Next.js, TypeScript, Node.js, and Socket.IO** to enhance productivity in group study sessions.  
 
-## 🚀 Live Demo  
-🔗 [Try it out here!](https://group-pomodoro-timer.vercel.app/home)  
+## 🚀 Live   
+🔗 [Try it out here!](https://pomohubs.tech)  
 
 ## 📌 Features  
 - 🎯 **Create and Join Rooms** – Users can create private study rooms or join existing ones.  
