@@ -1,4 +1,5 @@
-# ⏳ Group Pomodoro Timer with Socket.IO  
+# <img width="600" height="480" alt="image" src="https://github.com/user-attachments/assets/15224787-cd40-4346-8e66-29c7f2612e66" />
+ Group Pomodoro Timer with Socket.IO  
 
 A **real-time collaborative Pomodoro timer** where users can **create and join rooms**, **synchronize study sessions**, and **see active participants**. Built with **Next.js, TypeScript, Node.js, and Socket.IO** to enhance productivity in group study sessions.  
 
@@ -6,11 +7,11 @@ A **real-time collaborative Pomodoro timer** where users can **create and join r
 🔗 [Try it out here!](https://pomohubs.tech)  
 
 ## 📌 Features  
-- 🎯 **Create and Join Rooms** – Users can create private study rooms or join existing ones.  
-- 🔄 **Real-Time Synchronization** – Pomodoro timer updates across all connected users using WebSocket.  
-- 👥 **See Active Participants** – View all users in a session in real time.  
-- 🔒 **User Authentication** – Secure login with Clerk for personalized rooms and session tracking.  
-- 🎨 **Modern UI** – Built with **React components** and **TailwindCSS** for a clean and responsive design.  
+- **Create and Join Rooms** – Users can create private study rooms or join existing ones.  
+- **Real-Time Synchronization** – Pomodoro timer updates across all connected users using WebSocket.  
+- **See Active Participants** – View all users in a session in real time.  
+- **User Authentication** – Secure login with Clerk for personalized rooms and session tracking.  
+- **Modern UI** – Built with **React components** and **TailwindCSS** for a clean and responsive design.  
 
 ## 🛠️ Tech Stack  
 - **Frontend:** Next.js, TypeScript, React, TailwindCSS  
