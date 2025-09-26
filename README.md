@@ -32,7 +32,7 @@ A **real-time collaborative Pomodoro timer** where users can **create and join r
 ## ⚙️ Installation & Setup  
 Clone the repository and install dependencies:  
 ```bash
-git clone https://github.com/your-username/group-pomodoro-timer.git
+git clone https://github.com/deveshshrestha20/Pomodoro-timer.git
 cd group-pomodoro-timer
 npm install
 
